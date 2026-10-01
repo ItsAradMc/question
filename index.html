@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>یک سوال ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", Tahoma, Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at 15% 20%, #ff4f9a, transparent 30%),
+                radial-gradient(circle at 85% 80%, #704cff, transparent 30%),
+                linear-gradient(135deg, #100020, #27004f, #080014);
+
+            color: white;
+        }
+
+        /* نورهای متحرک پس زمینه */
+
+        .glow {
+            position: fixed;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            background: #ff4f9a;
+
+            filter: blur(110px);
+
+            opacity: 0.28;
+
+            animation: moveGlow 8s infinite alternate ease-in-out;
+
+            pointer-events: none;
+        }
+
+        .glow.two {
+            background: #704cff;
+
+            animation-duration: 10s;
+            animation-delay: -4s;
+        }
+
+        @keyframes moveGlow {
+
+            0% {
+                transform: translate(-180px, -120px);
+            }
+
+            100% {
+                transform: translate(180px, 120px);
+            }
+        }
+
+        /* اسم سازنده */
+
+        .creator {
+            position: fixed;
+
+            top: 22px;
+            right: 25px;
+
+            padding: 10px 17px;
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            font-size: 15px;
+            font-weight: 600;
+
+            color: white;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.20);
+
+            z-index: 20;
+
+            animation: creatorAppear 1s ease;
+        }
+
+        @keyframes creatorAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* کارت اصلی */
+
+        .card {
+
+            position: relative;
+            z-index: 5;
+
+            width: min(90%, 520px);
+
+            padding: 50px 30px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            border-radius: 32px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45),
+                inset 0 1px rgba(255,255,255,0.18);
+
+            animation: cardAppear 0.8s ease;
+        }
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* قلب اصلی */
+
+        .main-heart {
+
+            font-size: 65px;
+
+            display: inline-block;
+
+            animation: heartbeat 1.4s infinite;
+
+            filter:
+                drop-shadow(0 8px 20px rgba(255,0,100,0.4));
+        }
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.18);
+            }
+        }
+
+        h1 {
+
+            margin: 22px 0 35px;
+
+            font-size: 30px;
+
+            line-height: 1.5;
+
+            text-shadow:
+                0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* دکمه ها */
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 20px;
+
+            min-height: 90px;
+        }
+
+        button {
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 15px 32px;
+
+            border-radius: 18px;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            color: white;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        #yes {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff3d81,
+                    #ff006e
+                );
+
+            box-shadow:
+                0 10px 30px rgba(255,0,110,0.40);
+
+            transform: scale(1);
+        }
+
+        #no {
+
+            background:
+                rgba(255,255,255,0.12);
+
+            border:
+                1px solid rgba(255,255,255,0.25);
+
+            backdrop-filter: blur(10px);
+
+            transform: scale(1);
+        }
+
+        #yes:hover {
+
+            box-shadow:
+                0 15px 45px rgba(255,0,110,0.65);
+
+            transform:
+                translateY(-3px) scale(1.05);
+        }
+
+        #no:hover {
+
+            transform:
+                translateY(-3px);
+        }
+
+        /* پیام نهایی */
+
+        #message {
+
+            display: none;
+
+            margin-top: 20px;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            animation: messageAppear 0.7s ease;
+
+            text-shadow:
+                0 5px 25px rgba(255,0,100,0.4);
+        }
+
+        @keyframes messageAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* قلب های شناور */
+
+        .floating-heart {
+
+            position: fixed;
+
+            bottom: -60px;
+
+            font-size: 25px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            animation:
+                floatHeart 9s linear infinite;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(0.7);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.7;
+            }
+
+            70% {
+                opacity: 0.5;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-115vh)
+                    rotate(360deg)
+                    scale(1.2);
+
+                opacity: 0;
+            }
+        }
+
+        .heart1 {
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .heart2 {
+            left: 22%;
+            animation-delay: 2s;
+        }
+
+        .heart3 {
+            left: 42%;
+            animation-delay: 4s;
+        }
+
+        .heart4 {
+            left: 67%;
+            animation-delay: 1s;
+        }
+
+        .heart5 {
+            left: 85%;
+            animation-delay: 3s;
+        }
+
+        .heart6 {
+            left: 55%;
+            animation-delay: 6s;
+        }
+
+        /* موبایل */
+
+        @media (max-width: 600px) {
+
+            .creator {
+
+                top: 15px;
+                right: 15px;
+
+                font-size: 13px;
+
+                padding:
+                    8px 13px;
+            }
+
+            .card {
+
+                width: 90%;
+
+                padding:
+                    40px 20px;
+
+                border-radius: 27px;
+            }
+
+            .main-heart {
+                font-size: 55px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+
+                padding:
+                    13px 24px;
+
+                font-size: 17px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- نورهای پس زمینه -->
+
+    <div class="glow"></div>
+    <div class="glow two"></div>
+
+    <!-- اسم سازنده -->
+
+    <div class="creator">
+        ItsAradMc ❤️
+    </div>
+
+    <!-- قلب های متحرک -->
+
+    <div class="floating-heart heart1">❤️</div>
+    <div class="floating-heart heart2">💗</div>
+    <div class="floating-heart heart3">💖</div>
+    <div class="floating-heart heart4">💕</div>
+    <div class="floating-heart heart5">❤️</div>
+    <div class="floating-heart heart6">💘</div>
+
+    <!-- کارت -->
+
+    <div class="card">
+
+        <div class="main-heart">
+            ❤️
+        </div>
+
+        <h1 id="question">
+            آیا منو دوست داری؟
+        </h1>
+
+        <div class="buttons" id="buttons">
+
+            <button id="yes">
+                آره ❤️
+            </button>
+
+            <button id="no">
+                نه 😐
+            </button>
+
+        </div>
+
+        <div id="message">
+            می‌دونستم آره می‌گی! 😍❤️
+        </div>
+
+    </div>
+
+    <script>
+
+        const yesButton =
+            document.getElementById("yes");
+
+        const noButton =
+            document.getElementById("no");
+
+        const question =
+            document.getElementById("question");
+
+        const buttons =
+            document.getElementById("buttons");
+
+        const message =
+            document.getElementById("message");
+
+        let yesSize = 1;
+
+        let noSize = 1;
+
+        /* وقتی نه زده می شود */
+
+        noButton.addEventListener(
+            "click",
+            function () {
+
+                yesSize += 0.25;
+
+                noSize -= 0.12;
+
+                if (noSize < 0.20) {
+                    noSize = 0.20;
+                }
+
+                yesButton.style.transform =
+                    `scale(${yesSize})`;
+
+                noButton.style.transform =
+                    `scale(${noSize})`;
+
+                if (yesSize >= 1.75) {
+
+                    question.innerHTML =
+                        "مطمئنی؟ 🥺❤️";
+                }
+
+                if (yesSize >= 2.5) {
+
+                    question.innerHTML =
+                        "واقعاً نه؟ 😭❤️";
+                }
+
+                if (yesSize >= 3.5) {
+
+                    question.innerHTML =
+                        "فقط آره رو بزن 😭❤️";
+                }
+
+            }
+        );
+
+        /* وقتی آره زده می شود */
+
+        yesButton.addEventListener(
+            "click",
+            function () {
+
+                question.innerHTML =
+                    "😍❤️ می‌دونستم آره می‌گی! ❤️😍";
+
+                buttons.style.display =
+                    "none";
+
+                message.style.display =
+                    "block";
+
+                createHearts();
+
+            }
+        );
+
+        /* انفجار قلب */
+
+        function createHearts() {
+
+            for (
+                let i = 0;
+                i < 35;
+                i++
+            ) {
+
+                const heart =
+                    document.createElement("div");
+
+                const hearts = [
+                    "❤️",
+                    "💖",
+                    "💕",
+                    "💗",
+                    "💘"
+                ];
+
+                heart.innerHTML =
+                    hearts[
+                        Math.floor(
+                            Math.random() *
+                            hearts.length
+                        )
+                    ];
+
+                heart.style.position =
+                    "fixed";
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+                heart.style.top =
+                    Math.random() * 100 + "vh";
+
+                heart.style.fontSize =
+                    (15 +
+                    Math.random() * 30) +
+                    "px";
+
+                heart.style.pointerEvents =
+                    "none";
+
+                heart.style.zIndex =
+                    "100";
+
+                document.body.appendChild(
+                    heart
+                );
+
+                heart.animate(
+
+                    [
+                        {
+                            transform:
+                                "translateY(0) scale(0)",
+                            opacity: 0
+                        },
+
+                        {
+                            transform:
+                                "translateY(-100px) scale(1)",
+                            opacity: 1
+                        },
+
+                        {
+                            transform:
+                                "translateY(-300px) scale(0.5)",
+                            opacity: 0
+                        }
+                    ],
+
+                    {
+                        duration:
+                            1800 +
+                            Math.random() * 2200,
+
+                        easing:
+                            "ease-out"
+                    }
+                );
+
+                setTimeout(
+                    () => heart.remove(),
+                    4500
+                );
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
